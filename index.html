@@ -60,12 +60,10 @@
 
 
     function stopscan() {
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then(function (stream) {
-
-        stream.getTracks().forEach(function (track) {
-          track.stop();
-        });
-      });
+      for (const track of video.srcObject.getTracks()) {
+        track.stop();
+      }
+      video.srcObject = null;
       // video.hidden = true;
       canvasContainer.hidden = true;
       cancelAnimationFrame(cancelframe);
